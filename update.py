@@ -50,10 +50,11 @@ def vulns(plugins):
     cu.execute("select * from vulns")
     print "Result:\n"+ str(cu.fetchall())
 
-def cms():
-    f = file("dbs/cms.txt")
-    s = json.load(f)
-    print s.keys()
+#def cms():
+#    f = file("dbs/cms.txt")
+#    s = json.load(f)
+#    for key in s.keys():
+#        print key.lower()
 #    for e in plugins:
 #        #print e
 #        exp = os.path.basename(e).split('.')[0]
@@ -74,7 +75,7 @@ def cms():
 #    print "Result:\n"+ str(cu.fetchall())
 
 if __name__ == '__main__':
-    print '???'
+    print 'Sql conneting...'
     cx = sqlite3.connect("dbs/ass.db")
     cu = cx.cursor()
     cu.execute("DROP TABLE if exists cms ")
@@ -91,6 +92,7 @@ if __name__ == '__main__':
     """ cms """
     #plugins = GetFileList('./dbs/cms', [])
     #cms()
+    #cms update by handed defaultly.
 
     ##print plugins
     #for e in plugins:
