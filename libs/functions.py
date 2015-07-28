@@ -83,11 +83,3 @@ def run_payload(payload,arr):
         plugin=__import__("modules."+payload, fromlist=[payload])
         plugin.exploit(arr)
 
-
-
-
-
-
-
-
-
