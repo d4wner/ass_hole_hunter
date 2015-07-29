@@ -126,7 +126,7 @@ class hunter_plugin:
                 hunter_exploit = getattr(exp_plugin,'hunter_exploit')
                 #hunter_exploit.exploit(site)
                 hunter_exploit = hunter_exploit(site)
-                print '-------'
+                #print '-------'
                 tp.add_job(hunter_exploit.exploit)
         tp.start()
         try:

@@ -188,30 +188,38 @@ class hunter_plugin:
     #        print 'Error: %s' % e    
 
     def bgp_he(self,input_url):
-        r = open(global_config.infos['result_path']+'bgp_he.txt','w+')
-        bgp_he_ = "http://bgp.he.net/dns/"+input_url+"#_dns"
+        #r = open(global_config.infos['result_path']+'bgp_he.txt','w+')
+        bgp_he_dns = "http://bgp.he.net/dns/"+input_url+"#_dns"
         print bgp_he_dns
         #resp = urllib2.urlopen(bgp_he_url).read()
-        req = urllib2.Request(bgp_he_url)
+        req = urllib2.Request(bgp_he_dns)
         req.add_header('User-Agent','Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)')
         req.add_header('referer','http://bgp.he.net')
         resp= urllib2.urlopen(req).read()
         soup = BeautifulSoup(''.join(resp))
-        dnsdata_info_div = soup.find("div", attrs={"class": "dnsdata"})
-        ip_text = result_info_div.find_all("a")
+        dnsdata_info_div = soup.find_all("div", attrs={"class": "dnsdata"})[3]
+        ip_text = dnsdata_info_div.find_all("a")
         #ips= []
         for ip in ip_text:
             print ip
+            ip = ip.text
             #ips.append(ip)
             bgp_he_url = "http://bgp.he.net/ip/"+ip+"#_dns"
-            req = urllib2.Request(bgp_he_url)
-        result_info_div = soup.find("div", attrs={"id": "dns"})
-        a_text = result_info_div.find_all("a")
-        
-        for item in a_text:
-            print item.text
-            r.writelines(item.text+'\n')
-        r.close()
+            print bgp_he_url
+            
+            r_req = urllib2.Request(bgp_he_url)
+            r_req.add_header('User-Agent','Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)')
+            r_req.add_header('referer','http://bgp.he.net')
+            r_resp= urllib2.urlopen(r_req).read()
+            print '------'
+            r_soup = BeautifulSoup(''.join(r_resp))
+            result_info_div = r_soup.find("div", attrs={"id": "dns"})
+            a_text = result_info_div.find_all("a")
+            r = open(global_config.infos['result_path']+'bgp_he_'+ip+'.txt','w+')
+            for item in a_text:
+                print item.text
+                r.writelines(item.text+'\n')
+            r.close()
 
 
     def fofa(self,input_url):
