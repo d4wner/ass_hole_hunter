@@ -4,12 +4,17 @@
 #from libs.Threads import ThreadPool
 #from libs.color import *
 #import libs.socks as socks
+
+
 import urllib2
 import random
 import time
 import re
 import os
+import sys
 
+sys.path.append('dbs/')
+from config import global_config
 
 def url_head(url):
     try:
@@ -66,6 +71,11 @@ def url_proxy(url,port_type):
     else:
         resp = None
     return resp
+
+def result_write():
+    result = global_config.infos['result_path']+'/report.txt'
+    r = open(result,'a+')
+    return r
 
 
 def key_find(url,value):

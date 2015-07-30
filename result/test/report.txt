@@ -1,0 +1,16 @@
+http://127.0.0.1:80/
+Dz2.0_pass:bf4e12084cfea8ee9e83995522b8b1ca
+vuln_name:Discuz x3.2前台GET型SQL注入漏洞（绕过全局WAF）
+=============
+http://192.168.116.128/
+Dz2.0_pass:bf4e12084cfea8ee9e83995522b8b1ca
+vuln_name:Discuz x3.2前台GET型SQL注入漏洞（绕过全局WAF）
+=============
+http://127.0.0.1:80/
+[!]Pass:a123456
+vuln_name:Discuz 的UCenter创始人密码可被爆破
+=============
+http://192.168.116.128/
+[!]Pass:a123456
+vuln_name:Discuz 的UCenter创始人密码可被爆破
+=============

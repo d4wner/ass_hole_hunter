@@ -35,12 +35,20 @@ def what_web():
     cx = sqlite3.connect(result_db_path)
     cu = cx.cursor()
     cu.execute("select url,protocol from result")
+    tp = ThreadPool(5)
     for item in cu.fetchall():
-        print item[0],item[1]
+        #print item[0],item[1]
         url = item[0]
         protocol = item[1]
         cms_attack = hunter_plugin(url,protocol)
-        cms_attack.exploit()
+        #cms_attack.exploit()
+        tp.add_job(cms_attack.exploit)
+    tp.start()
+    try:
+        tp.wait_for_complete()
+    except KeyboardInterrupt:
+        tp.stop()
+
 
 
 def title_banner_get():
