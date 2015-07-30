@@ -1,13 +1,14 @@
 #coding=utf-8
-__author__ = 'DM_'
+
 
 import threading
 import Queue
 
 
 class work(threading.Thread):
-    def __init__(self, workQueue, timeout=3, **kwargs):
+    def __init__(self, workQueue, result_queue, timeout=3, **kwargs):
         self.timeout = timeout
+        self.result_queue = result_queue
         self.isRunning = False
         self.workQueue = workQueue
         threading.Thread.__init__(self, kwargs=kwargs)
@@ -21,8 +22,9 @@ class work(threading.Thread):
         while self.isRunning:
             try:
                 func, args, kwargs = self.workQueue.get(timeout=self.timeout)
-                apply(func, *args, **kwargs)
+                result = apply(func, *args, **kwargs)
                 self.workQueue.task_done()
+                self.result_queue.put(result, False)
             except Queue.Empty:
                 self.isRunning = False
             except:
@@ -31,14 +33,26 @@ class work(threading.Thread):
 class ThreadPool:
     def __init__(self, num_of_threads=10):
         self.workQueue = Queue.Queue()
+        self.result_queue = Queue.Queue()
         self.threads = []
 
         for i in range(num_of_threads):
-            thread = work(self.workQueue)
+            thread = work(self.workQueue, self.result_queue)
             self.threads.append(thread)
 
     def add_job(self, fun, *args, **kwargs):
         self.workQueue.put((fun, args, kwargs))
+    
+    def get_result(self):
+        results = []
+        try:
+            while True:
+                result = self.result_queue.get(block=False)
+                results.append(result)
+        except:
+            pass
+        finally:
+            return results
 
     def start(self):
         try:
@@ -61,3 +75,16 @@ class ThreadPool:
             self.stop()
             print
 
+
+if __name__ == "__main__":
+    tp = ThreadPool(5)
+    for line in open('url.txt').readlines():
+        hunter = hunter_plugin(line)
+        tp.add_job(hunter.exploit)
+    tp.start()
+    try:
+        tp.wait_for_complete()
+        results = tp.get_result()
+        print results
+    except KeyboardInterrupt:
+        tp.stop()

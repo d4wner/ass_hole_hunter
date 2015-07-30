@@ -122,7 +122,7 @@ class hunter_plugin:
         print '[+]Status: '+status
 
         '''start to insert sql'''
-        insert = "INSERT INTO result (url ,protocol, banner, cms_type ,vuln_path) VALUES ('"+self.url+"','"+protocol +"','"+resp+"','','')"
+        insert = "INSERT INTO result (url ,protocol, banner, cms_type ,vuln_confirm) VALUES ('"+self.url+"','"+protocol +"','"+resp+"','','')"
         print insert
         try:
             cu.execute(insert)

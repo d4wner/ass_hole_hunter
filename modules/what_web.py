@@ -3,6 +3,9 @@
 Demo modules for ass_hole_hunter
 Reprouct from mst
 '''
+
+import sys
+sys.path.append('dbs/')
 #from libs.functions import *
 #import modules.*
 import hashlib
@@ -11,7 +14,7 @@ import sqlite3
 import requests
 from libs.Threads import ThreadPool
 from libs.functions import *
-
+from config import global_config
 
 class hunter_plugin:
     '''cms feature detect'''
@@ -34,6 +37,10 @@ class hunter_plugin:
 
 
     def exploit(self):
+        #global rcx,rcu
+        global result_db_path
+        result_db_path = global_config.infos['result_path']+"/result.db"
+     
         if self.protocol == 'http' or self.protocol == 'https':
             url = self.protocol+'://'+self.url+'/'
         else:
@@ -111,12 +118,20 @@ class hunter_plugin:
 
 
     def cms_attack(self, site, cms):
+        print 'cms_attack....'
+        url = site.split('//')[1].split('/')[0]
+        cms_cx = sqlite3.connect(result_db_path)
+        cms_cu = cms_cx.cursor()
+        cms_cu.execute("update result set cms_type='"+cms +"'where url ='"+url+"'")
+        cms_cx.commit()
+        #rcx.commit()
+        
         cx = sqlite3.connect("dbs/ass.db")
         cu = cx.cursor()
         cu.execute("select vuln_path from vulns where vuln_path like '%"+cms+"%'")
         tp = ThreadPool(5)
         #print str(cu.fetchall())
-       #线程池
+       #线程???
         for paths in cu.fetchall():
             for path in paths:
                 print str(path)
@@ -131,6 +146,15 @@ class hunter_plugin:
         tp.start()
         try:
             tp.wait_for_complete()
+            results = tp.get_result()
+            if len(results) != 0:
+                #print results
+                confirm_cx = sqlite3.connect(result_db_path)
+                confirm_cu = confirm_cx.cursor()
+                confirm_cu.execute("update result set vuln_confirm= 'y' where url ='"+url+"'")
+            else:
+                confirm_cu.execute("update result set vuln_confirm= 'n' where url ='"+url+"'")
+            confirm_cx.commit()
         except:
             tp.stop()
 
@@ -152,23 +176,3 @@ class hunter_plugin:
         except Exception,e:
             print e
             pass
-
-
-#    def cms_attack(site, cms):
-#        cx = sqlite3.connect("result/result.db")
-#        cu = cx.cursor()
-#        cu.execute("select vuln_path from result where vuln_path like '%"+cms+"%'")
-#        tp = ThreadPool(5)
-#       #线程池
-#        for path in cu.fetchall():
-#            print "[+]vuln_path:"+item
-#            exp_plugin=__import__(path, fromlist=[path])
-#            hunter_exploit = getattr(exp_plugin,'hunter_exploit')
-#            #hunter_exploit.exploit(site)
-#            tp.add_job(hunter_exploit.exploit(site))
-#        tp.start()
-#        try:
-#            tp.wait_for_complete()
-#        except:
-#            tp.stop()
-

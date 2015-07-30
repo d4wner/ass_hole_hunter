@@ -6,7 +6,7 @@ import httplib
 import urllib
 import urllib2
 from bs4 import BeautifulSoup
-import shodan
+#import shodan
 import sys
 import os
 import re
