@@ -2,18 +2,18 @@
 #coding=utf-8
 
 from libs.functions import *
-import httplib
-import urllib
-import urllib2
-from bs4 import BeautifulSoup
+#import httplib
+#import urllib
+#import urllib2
+#from bs4 import BeautifulSoup
 #import shodan
-import sys
-import os
-import re
+#import sys
+#import os
+#import re
 
 
-sys.path.append('dbs/')
-from config import global_config
+#sys.path.append('dbs/')
+#from config import global_config
 
 
 #input_url=raw_input("please input url:")

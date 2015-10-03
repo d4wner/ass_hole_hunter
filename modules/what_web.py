@@ -4,17 +4,17 @@ Demo modules for ass_hole_hunter
 Reprouct from mst
 '''
 
-import sys
-sys.path.append('dbs/')
-#from libs.functions import *
+#import sys
+#sys.path.append('dbs/')
+from libs.functions import *
 #import modules.*
 import hashlib
 import json
-import sqlite3
-import requests
-from libs.Threads import ThreadPool
-from libs.functions import *
-from config import global_config
+#import sqlite3
+#import requests
+#from libs.Threads import ThreadPool
+#from libs.functions import *
+#from config import global_config
 
 class hunter_plugin:
     '''cms feature detect'''
@@ -34,6 +34,7 @@ class hunter_plugin:
     def __init__(self,url,protocol):
         self.url = url
         self.protocol = protocol
+        self.result = []
 
 
     def exploit(self):
@@ -46,7 +47,7 @@ class hunter_plugin:
         else:
             return None
         print 'exp_start...'
-        print url+'\n'
+        print self.url+'\n'
         self.cmsjsons = self.retcmsjsons('dbs/cms.txt')
         #threadsNum = int(self.opts['threads'])
         ThreadsNum = 10
@@ -66,6 +67,7 @@ class hunter_plugin:
             tp.wait_for_complete()
         except KeyboardInterrupt:
             tp.stop()
+        print self.result
         print 'exp_stop...'
 
         #if len(self.result):
@@ -122,7 +124,7 @@ class hunter_plugin:
         url = site.split('//')[1].split('/')[0]
         cms_cx = sqlite3.connect(result_db_path)
         cms_cu = cms_cx.cursor()
-        cms_cu.execute("update result set cms_type='"+cms +"'where url ='"+url+"'")
+        cms_cu.execute("update result set cms_type='"+cms +"'where url ='"+self.url+"'")
         cms_cx.commit()
         #rcx.commit()
         
@@ -147,16 +149,26 @@ class hunter_plugin:
         try:
             tp.wait_for_complete()
             results = tp.get_result()
+            #print "==="+str(results)
+            #vuln_text = base64.encodestring(results)
+            confirm_cx = sqlite3.connect(result_db_path)
+            confirm_cu = confirm_cx.cursor()
             if len(results) != 0:
-                #print results
-                confirm_cx = sqlite3.connect(result_db_path)
-                confirm_cu = confirm_cx.cursor()
-                confirm_cu.execute("update result set vuln_confirm= 'y' where url ='"+url+"'")
+                #print '====='+str(url)
+                #confirm_cx = sqlite3.connect(result_db_path)
+                #confirm_cu = confirm_cx.cursor()
+                #vuln_text = str(results)[2:-2]
+                vuln_text = base64.encodestring(str(results))
+                print vuln_text
+                confirm_cu.execute("update result set vuln_confirm= 'y', vuln_text ='"+vuln_text+"' where url ='"+self.url+"'")
+                #confirm_cu.execute("update result set vuln_confirm= 'y' where url ='"+self.url+"'")
             else:
-                confirm_cu.execute("update result set vuln_confirm= 'n' where url ='"+url+"'")
+                confirm_cu.execute("update result set vuln_confirm= 'n' where url ='"+self.url+"'")
             confirm_cx.commit()
-        except:
+        except Exception,e:
+            print e
             tp.stop()
+        print '222222'
 
     def whatCMS(self, site, path):
         try:
@@ -166,13 +178,14 @@ class hunter_plugin:
             resp = url_Get(requests, checkurl)
             result = self.getcmsnamefromresp(path, resp, self.cmsjsons)
             if result:
-                #if not (site, result[0]) in self.result:
-                print site, result[0].split('@')[0], result[1]
+                if not (site, result[0]) in self.result:
+                    print site, result[0].split('@')[0], result[1]
                     #color.echo("[+]%s : %s ver: %s \t" % (site, result[0].split('@')[0]), result[1], GREEN)
-                print str(result[0].split('@')[0])
-                self.cms_attack(site, str(result[0].split('@')[0]))
+                    print str(result[0].split('@')[0])
+                    self.result.append((site, result[0]))
+                    self.cms_attack(site, str(result[0].split('@')[0]))
                     #self.result.append((site, result[0]))
-                #self.log.append((site, path, result[0], result[1]))
+                    #self.log.append((site, path, result[0], result[1]))
         except Exception,e:
             print e
             pass

@@ -74,7 +74,7 @@ def crete_tmp_db():
     cx = sqlite3.connect(result_db_path)
     cu = cx.cursor()
     cu.execute("DROP TABLE if exists result")
-    cu.execute("CREATE TABLE result (id INTEGER primary key AUTOINCREMENT,url VARCHAR(255),protocol VARCHAR(50),banner VARCHAR(255),cms_type VARCHAR(255) ,vuln_confirm  VARCHAR(50));")
+    cu.execute("CREATE TABLE result (id INTEGER primary key AUTOINCREMENT,url VARCHAR(255),protocol VARCHAR(50),banner VARCHAR(255),cms_type VARCHAR(255) ,vuln_confirm  VARCHAR(50) , vuln_text VARCHAR(255));")
     time.sleep(1)
     print 'Result_db has been init...'
 

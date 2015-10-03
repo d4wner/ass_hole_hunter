@@ -6,13 +6,13 @@ Reprouct from mst
 
 from libs.functions import *
 import telnetlib
-import socket
-import urllib
-import sqlite3
-import sys
+#import socket
+#import urllib
+#import sqlite3
+#import sys
 
-sys.path.append('dbs/')
-from config import global_config
+#sys.path.append('dbs/')
+#from config import global_config
 
 def test():
     print "[!]test success!"
@@ -40,24 +40,39 @@ class hunter_plugin:
         result_db_path = global_config.infos['result_path']+"/result.db"
         cx = sqlite3.connect(result_db_path)
         cu = cx.cursor()
-        
-        '''get ip and port'''
+        path = "/"
+        print '[+]Start get path...'
+        source_url = self.url
+        if  '/' in self.url:
+            ip = self.url.split('/')[0]
+            paths = self.url.split('/')[1:]
+            for item in paths:
+                path = path+item+'/'
+            self.url = ip
+
+        else:
+            pass
+        print '[+]Start get ip and port...'
         if ":" in self.url:
             ip = self.url.split(':')[0]
             port = self.url.split(':')[1].strip()
         else:
             ip = self.url.strip()
             port = "80"
-
+        print path
+        print ip
+        print port
         '''start exploit'''
         #url = pre_url+":"+str(port)
         timeout = 2
         socket.setdefaulttimeout(timeout)        
-        url = "http://"+ip+":"+str(port)
-        url_s = "https://"+ip+":"+str(port)
+        print '==='+ip
+        url = "http://"+ip+":"+str(port)+path
+        url_s = "https://"+ip+":"+str(port)+path
         print url
         print url_s
         try:    
+            print '???'
             #url = "http://192.168.10.103:23"
             req = urllib2.Request(url)
             #========´úÀí=========#
@@ -76,7 +91,8 @@ class hunter_plugin:
             resp = title_content[0][7:-8]
             protocol = 'http'
             status = 'y'
-        except:
+        except Exception,e:
+            print e
             print "[x]Http failed,try https..."
             
             try:
@@ -122,7 +138,7 @@ class hunter_plugin:
         print '[+]Status: '+status
 
         '''start to insert sql'''
-        insert = "INSERT INTO result (url ,protocol, banner, cms_type ,vuln_confirm) VALUES ('"+self.url+"','"+protocol +"','"+resp+"','','')"
+        insert = "INSERT INTO result (url ,protocol, banner, cms_type ,vuln_confirm,vuln_text) VALUES ('"+source_url+"','"+protocol +"','"+resp+"','','','')"
         print insert
         try:
             cu.execute(insert)

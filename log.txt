@@ -1,0 +1,168 @@
+<html>
+<head>
+<title>DedeCMS提示信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<base target='_self'/>
+<style>div{line-height:160%;}</style></head>
+<body leftmargin='0' topmargin='0' bgcolor='#FFFFFF'>
+<center>
+<script>
+      var pgo=0;
+      function JumpUrl(){
+        if(pgo==0){ location='javascript:history.go(-1);'; pgo=1; }
+      }
+document.write("<br /><div style='width:450px;padding:0px;border:1px solid #DADADA;'><div style='padding:6px;font-size:12px;border-bottom:1px solid #DADADA;background:#DBEEBD url(/dedecms/plus/img/wbg.gif)';'><b>DedeCMS 提示信息！</b></div>");
+document.write("<div style='height:130px;font-size:10pt;background:#ffffff'><br />");
+document.write("你的密码错误!");
+document.write("<br /><a href='javascript:history.go(-1);'>如果你的浏览器没反应，请点击这里...</a><br/></div>");
+setTimeout('JumpUrl()',1000);</script>
+</center>
+</body>
+</html>
+<html>
+<head>
+<title>DedeCMS提示信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<base target='_self'/>
+<style>div{line-height:160%;}</style></head>
+<body leftmargin='0' topmargin='0' bgcolor='#FFFFFF'>
+<center>
+<script>
+      var pgo=0;
+      function JumpUrl(){
+        if(pgo==0){ location='javascript:history.go(-1);'; pgo=1; }
+      }
+document.write("<br /><div style='width:450px;padding:0px;border:1px solid #DADADA;'><div style='padding:6px;font-size:12px;border-bottom:1px solid #DADADA;background:#DBEEBD url(/dedecms/plus/img/wbg.gif)';'><b>DedeCMS 提示信息！</b></div>");
+document.write("<div style='height:130px;font-size:10pt;background:#ffffff'><br />");
+document.write("你的密码错误!");
+document.write("<br /><a href='javascript:history.go(-1);'>如果你的浏览器没反应，请点击这里...</a><br/></div>");
+setTimeout('JumpUrl()',1000);</script>
+</center>
+</body>
+</html>
+<html>
+<head>
+<title>DedeCMS提示信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<base target='_self'/>
+<style>div{line-height:160%;}</style></head>
+<body leftmargin='0' topmargin='0' bgcolor='#FFFFFF'>
+<center>
+<script>
+      var pgo=0;
+      function JumpUrl(){
+        if(pgo==0){ location='index.php'; pgo=1; }
+      }
+document.write("<br /><div style='width:450px;padding:0px;border:1px solid #DADADA;'><div style='padding:6px;font-size:12px;border-bottom:1px solid #DADADA;background:#DBEEBD url(/dedecms/plus/img/wbg.gif)';'><b>DedeCMS 提示信息！</b></div>");
+document.write("<div style='height:130px;font-size:10pt;background:#ffffff'><br />");
+document.write("成功登录，正在转向管理管理主页！");
+document.write("<br /><a href='index.php'>如果你的浏览器没反应，请点击这里...</a><br/></div>");
+setTimeout('JumpUrl()',1000);</script>
+</center>
+</body>
+</html>
+<html>
+<head>
+<title>DedeCMS提示信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<base target='_self'/>
+<style>div{line-height:160%;}</style></head>
+<body leftmargin='0' topmargin='0' bgcolor='#FFFFFF'>
+<center>
+<script>
+      var pgo=0;
+      function JumpUrl(){
+        if(pgo==0){ location='login.php'; pgo=1; }
+      }
+document.write("<br /><div style='width:450px;padding:0px;border:1px solid #DADADA;'><div style='padding:6px;font-size:12px;border-bottom:1px solid #DADADA;background:#DBEEBD url(/dedecms/plus/img/wbg.gif)';'><b>DedeCMS 提示信息！</b></div>");
+document.write("<div style='height:130px;font-size:10pt;background:#ffffff'><br />");
+document.write("验证码不正确!");
+document.write("<br /><a href='login.php'>如果你的浏览器没反应，请点击这里...</a><br/></div>");
+setTimeout('JumpUrl()',1000);</script>
+</center>
+</body>
+</html>
+<html>
+<head>
+<title>DedeCMS提示信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<base target='_self'/>
+<style>div{line-height:160%;}</style></head>
+<body leftmargin='0' topmargin='0' bgcolor='#FFFFFF'>
+<center>
+<script>
+      var pgo=0;
+      function JumpUrl(){
+        if(pgo==0){ location='javascript:history.go(-1);'; pgo=1; }
+      }
+document.write("<br /><div style='width:450px;padding:0px;border:1px solid #DADADA;'><div style='padding:6px;font-size:12px;border-bottom:1px solid #DADADA;background:#DBEEBD url(/dedecms/plus/img/wbg.gif)';'><b>DedeCMS 提示信息！</b></div>");
+document.write("<div style='height:130px;font-size:10pt;background:#ffffff'><br />");
+document.write("你的密码错误!");
+document.write("<br /><a href='javascript:history.go(-1);'>如果你的浏览器没反应，请点击这里...</a><br/></div>");
+setTimeout('JumpUrl()',1000);</script>
+</center>
+</body>
+</html>
+<html>
+<head>
+<title>DedeCMS提示信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<base target='_self'/>
+<style>div{line-height:160%;}</style></head>
+<body leftmargin='0' topmargin='0' bgcolor='#FFFFFF'>
+<center>
+<script>
+      var pgo=0;
+      function JumpUrl(){
+        if(pgo==0){ location='javascript:history.go(-1);'; pgo=1; }
+      }
+document.write("<br /><div style='width:450px;padding:0px;border:1px solid #DADADA;'><div style='padding:6px;font-size:12px;border-bottom:1px solid #DADADA;background:#DBEEBD url(/dedecms/plus/img/wbg.gif)';'><b>DedeCMS 提示信息！</b></div>");
+document.write("<div style='height:130px;font-size:10pt;background:#ffffff'><br />");
+document.write("你的密码错误!");
+document.write("<br /><a href='javascript:history.go(-1);'>如果你的浏览器没反应，请点击这里...</a><br/></div>");
+setTimeout('JumpUrl()',1000);</script>
+</center>
+</body>
+</html>
+<html>
+<head>
+<title>DedeCMS提示信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<base target='_self'/>
+<style>div{line-height:160%;}</style></head>
+<body leftmargin='0' topmargin='0' bgcolor='#FFFFFF'>
+<center>
+<script>
+      var pgo=0;
+      function JumpUrl(){
+        if(pgo==0){ location='index.php'; pgo=1; }
+      }
+document.write("<br /><div style='width:450px;padding:0px;border:1px solid #DADADA;'><div style='padding:6px;font-size:12px;border-bottom:1px solid #DADADA;background:#DBEEBD url(/dedecms/plus/img/wbg.gif)';'><b>DedeCMS 提示信息！</b></div>");
+document.write("<div style='height:130px;font-size:10pt;background:#ffffff'><br />");
+document.write("成功登录，正在转向管理管理主页！");
+document.write("<br /><a href='index.php'>如果你的浏览器没反应，请点击这里...</a><br/></div>");
+setTimeout('JumpUrl()',1000);</script>
+</center>
+</body>
+</html>
+<html>
+<head>
+<title>DedeCMS提示信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<base target='_self'/>
+<style>div{line-height:160%;}</style></head>
+<body leftmargin='0' topmargin='0' bgcolor='#FFFFFF'>
+<center>
+<script>
+      var pgo=0;
+      function JumpUrl(){
+        if(pgo==0){ location='login.php'; pgo=1; }
+      }
+document.write("<br /><div style='width:450px;padding:0px;border:1px solid #DADADA;'><div style='padding:6px;font-size:12px;border-bottom:1px solid #DADADA;background:#DBEEBD url(/dedecms/plus/img/wbg.gif)';'><b>DedeCMS 提示信息！</b></div>");
+document.write("<div style='height:130px;font-size:10pt;background:#ffffff'><br />");
+document.write("验证码不正确!");
+document.write("<br /><a href='login.php'>如果你的浏览器没反应，请点击这里...</a><br/></div>");
+setTimeout('JumpUrl()',1000);</script>
+</center>
+</body>
+</html>

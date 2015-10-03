@@ -7,13 +7,26 @@
 
 
 import urllib2
+import urllib
+import httplib
 import random
 import time
 import re
 import os
 import sys
+import requests
+import sqlite3
+import socket
+import base64
+import cookielib
 
 sys.path.append('dbs/')
+
+from bs4 import BeautifulSoup
+from libs.Threads import ThreadPool
+from config import global_config
+
+
 from config import global_config
 
 def url_head(url):
@@ -44,13 +57,21 @@ def url_Get(req,url,**kwargs):
 
 
 
-def url_post(url,value):
-    data = urllib.urlencode(value)
+def url_post(url,value=""):
+    try:
+        data = urllib.urlencode(value)
+    except:
+        data = urllib.quote_plus(value)
+    print data
     headers = { 'User-Agent' : 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/31.0.1271.64 Safari/537.11' }
-    res = urllib2.Request(url,data,headers)
+    if value == "":
+        res = urllib2.Request(url,headers = headers)
+    else:
+        res = urllib2.Request(url,data = data ,headers = headers)
     try:
         resp = urllib2.urlopen(res)
-    except:
+    except Exception,e:
+        print e
         resp = None
     return resp
 
