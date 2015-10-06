@@ -1206,5 +1206,11 @@
             "path": "/data/css/arrow-down-title.jpg",
              "md5": "4846c7462c27b0bcf5f5d8b6d671575b"
         }
+    ],
+    "zuitu@php": [
+        {
+            "path": "/static/js/index.js",
+             "md5": "c0cc2f4ea1d06d01a18b9cbb8014934b"
+        }
     ]
 }
