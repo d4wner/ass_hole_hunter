@@ -37,7 +37,7 @@
              "md5": "1dfb729fdb3f61e3000958636730e5de"
         }
     ],
-     "discuz_7.2@php": [
+     "discuz@php": [
         {
             "path": "/forumdata/cache/common.js",
              "md5": "62304be19d86e64eaf78f8cd610b38a8"
@@ -141,7 +141,7 @@
              "md5": "8f4c21ec60e18ab8a3eb81b97c712da5"
         }
     ],
-     "discuz_x2.5@php": [
+     "discuz@php": [
         {
             "path": "/favicon.ico",
              "md5": "c028c4822428e83a358c60a93ef65381"
@@ -171,7 +171,7 @@
              "md5": "996507b745203776e2915e8878344146"
         }
     ],
-     "discuz_1.0@php": [
+     "discuz@php": [
         {
             "path": "/images/default/reply.gif",
              "md5": "c00763eee9ef06799151a9ee0b18ab13"
@@ -569,7 +569,7 @@
              "md5": "b8185cecb2bb24b2d0169f15e2ed09a8"
         }
     ],
-     "discuz_x2@php": [
+     "discuz@php": [
         {
             "path": "/static/js/md5.js",
              "md5": "26511efb3ce6f474b4dfddbebc4bef48"
@@ -1019,13 +1019,13 @@
              "md5": "5dcbdb49514b457226d7b5e789b258f9"
         }
     ],
-     "discuz_x2.5_or_x3.0@php": [
+     "discuz@php": [
         {
             "path": "/static/js/md5.js",
              "md5": "ef058f07a773acf03f6d2f7f6ecb68fd"
         }
     ],
-     "Discuz@php": [
+     "discuz@php": [
         {
             "path": "/favicon.ico",
              "md5": "e8535ded975539ff5d90087d0a463f3e"
