@@ -22,7 +22,7 @@ def GetFileList(dir, fileList):
     elif os.path.isdir(dir):
         for s in os.listdir(dir):
             #如果需要忽略某些文件夹，使用以下代码
-            if s == "demo" or s == '__init__.py' or s== 'pass_big.txt':
+            if s == "demo" or s == '__init__.py' or s== 'pass_big.txt' or s == 'path.txt':
                 continue
             newDir=os.path.join(dir,s)
             GetFileList(newDir, fileList)
