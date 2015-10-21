@@ -4,5 +4,6 @@
 class global_config: 
     infos = { 
         'result_path':'result/test/',
-        'author':'demon'
+        'author':'demon',
+        'thread_num':5
             }

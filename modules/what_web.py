@@ -50,7 +50,7 @@ class hunter_plugin:
         print self.url+'\n'
         self.cmsjsons = self.retcmsjsons('dbs/cms.txt')
         #threadsNum = int(self.opts['threads'])
-        ThreadsNum = 10
+        #ThreadsNum = 10
         '''threads can be set in opts  '''
         #sites = self.options['sites']
         #sitesLst = retSites(sites)
@@ -58,7 +58,7 @@ class hunter_plugin:
         #ArgsLst = self.retArgs(sitesLst, self.cmsjsons)
         ArgsLst = self.retArgs(url, self.cmsjsons)
         #threadsDo(self.whatCMS, threadsNum, ArgsLst)
-        tp = ThreadPool(ThreadsNum)
+        tp = ThreadPool(global_config.infos['thread_num'])
         for Args in ArgsLst:
             #print Args
             tp.add_job(self.whatCMS, Args)
@@ -131,7 +131,7 @@ class hunter_plugin:
         cx = sqlite3.connect("dbs/ass.db")
         cu = cx.cursor()
         cu.execute("select vuln_path from vulns where vuln_path like '%"+cms+"%'")
-        tp = ThreadPool(5)
+        tp = ThreadPool(global_config.infos['thread_num'])
         #print str(cu.fetchall())
        #线程???
         for paths in cu.fetchall():

@@ -35,7 +35,7 @@ def what_web():
     cx = sqlite3.connect(result_db_path)
     cu = cx.cursor()
     cu.execute("select url,protocol from result")
-    tp = ThreadPool(5)
+    tp = ThreadPool(global_config.infos['thread_num'])
     for item in cu.fetchall():
         #print item[0],item[1]
         url = item[0]
@@ -53,7 +53,7 @@ def what_web():
 
 def title_banner_get():
     from title_banner_hunter import  hunter_plugin
-    tp = ThreadPool(5)
+    tp = ThreadPool(global_config.infos['thread_num'])
     for line in open('url.txt').readlines():
         hunter = hunter_plugin(line)
         tp.add_job(hunter.exploit)
@@ -90,7 +90,7 @@ def crete_tmp_db():
 if __name__ == '__main__':
     crete_tmp_db()
     title_banner_get()
-    time.sleep(3)
+    #time.sleep(3)
     what_web()
     #same_ip_domain()
 

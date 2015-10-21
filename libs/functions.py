@@ -20,6 +20,7 @@ import socket
 import base64
 import cookielib
 import datetime
+import urlparse
 
 sys.path.append('dbs/')
 
@@ -54,6 +55,12 @@ def url_Get(req,url,**kwargs):
 
     except Exception, e:
         resp = None
+    return resp
+
+def url_Head(url,path,port):
+    conn = httplib.HTTPConnection(url) 
+    conn.request("HEAD",port,"/"+path)
+    resp = conn.getresponse()
     return resp
 
 

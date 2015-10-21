@@ -137,3 +137,10 @@ CMS编号--|--CMS名字--|--CMS语言类型--|--
 2.add special path txt
 3.add some plugins
 4.start to write email cms
+
+#update 2015,10.21
+1.add read_path and relate_path detect
+2.源代码模块另算！
+3.上传模块暂时放弃，伪代码在function里！
+4.这两天让子弹先飞一会儿！
+5.路径字典放置到dbs/dic/*.txt，作为单独调用

@@ -77,7 +77,7 @@ class ThreadPool:
 
 
 if __name__ == "__main__":
-    tp = ThreadPool(5)
+    tp = ThreadPool(global_config.infos['thread_num'])
     for line in open('url.txt').readlines():
         hunter = hunter_plugin(line)
         tp.add_job(hunter.exploit)
