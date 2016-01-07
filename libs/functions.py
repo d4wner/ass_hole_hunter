@@ -122,3 +122,13 @@ def run_payload(payload,arr):
         plugin=__import__("modules."+payload, fromlist=[payload])
         plugin.exploit(arr)
 
+
+def logo_print():
+    print """
++-----------------------------+
+|                             |
+|     Ass-Hole-Hunter v1.0    |
+|       Code by demon         |
+|                             |
++-----------------------------+
+    """
