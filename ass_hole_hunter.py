@@ -3,6 +3,7 @@
 import sys
 import sqlite3
 import time
+import getopt
 
 #from libs.Threads import ThreadPool
 from libs.color import *
@@ -84,15 +85,56 @@ def crete_tmp_db():
    # cx = sqlite3.connect(result_db_path)
 
 
+def search_plugin(para="all"):
+    cx = sqlite3.connect("dbs/ass.db")
+    cu = cx.cursor()
+    "select * from vulns where lower(vuln_name) like "
+    if para == "all":
+        cu.execute("select * from vulns")
+    else:
+        #print para
+        cu.execute("select * from vulns where lower(vuln_name) like '%"+para+"%'")
+    #print "Result:\n"+ str(cu.fetchall())
+    contents = cu.fetchall()
+    print "||vuln_name == vuln_type == vuln_source||\n"
+    for row in contents:
+        print "|| "+row[1]+" | "+row[2]+" | "+row[3]+" ||\n"
+    print "||vuln_name == vuln_type == vuln_source||\n"
 
 
+def main():
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "ho:s:v", ["help", "output=","search="])
+    except getopt.GetoptError as err:
+        # print help information and exit:
+        print(err) # will print something like "option -a not recognized"
+        #usage()
+        sys.exit(2)
+    output = None
+    verbose = False
+    for o, a in opts:
+        if o == "-v":
+            verbose = True
+        elif o in ("-h", "--help"):
+            usage()
+            sys.exit()
+        elif o in ("-o", "--output"):
+            output = a
+        elif o in ("-s", "--search"):
+            if a == "all":
+                search_plugin()
+            else:
+                search_plugin(a)
+        else:
+            assert False, "unhandled option"
 
 
 if __name__ == '__main__':
-    crete_tmp_db()
-    title_banner_get()
-    #time.sleep(3)
-    what_web()
+    main()
+    #crete_tmp_db()
+    #title_banner_get()
+    ##time.sleep(3)
+    #what_web()
     #same_ip_domain()
 
     #hunter = hunter_plugin('192.168.10.103:23')
