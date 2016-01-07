@@ -46,8 +46,9 @@ class hunter_plugin:
             url = self.protocol+'://'+self.url+'/'
         else:
             return None
-        print 'exp_start...'
-        print self.url+'\n'
+        print 'Exp_start...'
+        #print self.url+'\n'
+        print '[+]Current exp_url:'+url
         self.cmsjsons = self.retcmsjsons('dbs/cms.txt')
         #threadsNum = int(self.opts['threads'])
         #ThreadsNum = 10
@@ -67,8 +68,8 @@ class hunter_plugin:
             tp.wait_for_complete()
         except KeyboardInterrupt:
             tp.stop()
-        print self.result
-        print 'exp_stop...'
+        print '[+]Get result:'+str(self.result)
+        print 'Exp_stop...'
 
         #if len(self.result):
         #    logByLine(self.result,'output/%s-whatcms.txt' % currentTime("-"))
@@ -96,31 +97,34 @@ class hunter_plugin:
 
                 if record["path"] == path:
 
-                    if record.has_key("version"):
-                        version = record["version"]
-                    else:
-                        version = " Version missing..."
+                    #if record.has_key("version"):
+                    #    version = record["version"]
+                    #else:
+                    #    version = " Version missing..."
 
                     if record.has_key("status_code"):
                         if resp.status_code == record["status_code"]:
-                            return (cmsname,version)
+                            #return (cmsname,version)
+                            return cmsname
 
                     elif record.has_key("regex"):
                         if re.search(record["regex"], resp.content):
                             print "regex"
-                            return (cmsname,version)
+                            #return (cmsname,version)
+                            return cmsname
 
                     elif record.has_key("md5"):
                         responsehash = hashlib.md5(resp.content).hexdigest()
                         if str(responsehash) == record["md5"]:
-                            return (cmsname,version)
+                            #return (cmsname,version)
+                            return cmsname
                     else:
                         return None
                     break
 
 
     def cms_attack(self, site, cms):
-        print 'cms_attack....'
+        print 'Cms_attack starting....'
         url = site.split('//')[1].split('/')[0]
         cms_cx = sqlite3.connect(result_db_path)
         cms_cu = cms_cx.cursor()
@@ -166,9 +170,9 @@ class hunter_plugin:
                 confirm_cu.execute("update result set vuln_confirm= 'n' where url ='"+self.url+"'")
             confirm_cx.commit()
         except Exception,e:
-            print e
+            print '[x]Cms_attack error:'+str(e)
             tp.stop()
-        print '222222'
+        print '[!]Vuln_confirm result has been updated!'
 
     def whatCMS(self, site, path):
         try:
@@ -178,14 +182,14 @@ class hunter_plugin:
             resp = url_Get(requests, checkurl)
             result = self.getcmsnamefromresp(path, resp, self.cmsjsons)
             if result:
-                if not (site, result[0]) in self.result:
-                    print site, result[0].split('@')[0], result[1]
+                if not (site, result) in self.result:
+                    print site, result.split('@')[0]
                     #color.echo("[+]%s : %s ver: %s \t" % (site, result[0].split('@')[0]), result[1], GREEN)
-                    print str(result[0].split('@')[0])
-                    self.result.append((site, result[0]))
-                    self.cms_attack(site, str(result[0].split('@')[0]))
+                    print str(result.split('@')[0])
+                    self.result.append((site, result))
+                    self.cms_attack(site, str(result.split('@')[0]))
                     #self.result.append((site, result[0]))
                     #self.log.append((site, path, result[0], result[1]))
         except Exception,e:
-            print e
+            print '[x]WhatCMS error:'+str(e)
             pass

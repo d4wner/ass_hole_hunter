@@ -65,14 +65,13 @@ class hunter_plugin:
         '''start exploit'''
         #url = pre_url+":"+str(port)
         timeout = 2
-        socket.setdefaulttimeout(timeout)        
-        print '==='+ip
+        socket.setdefaulttimeout(timeout)
+        #print '==='+ip
         url = "http://"+ip+":"+str(port)+path
         url_s = "https://"+ip+":"+str(port)+path
         print url
         print url_s
-        try:    
-            print '???'
+        try:
             #url = "http://192.168.10.103:23"
             req = urllib2.Request(url)
             #========´úÀí=========#
@@ -120,7 +119,7 @@ class hunter_plugin:
                     protocol = 'other'
                     status = 'o'
                 except Exception,e:
-                    print "[x]Unexpected error!"
+                    print "[x]Get banner failed, unexpected error at:"+source_url
                     print e
                     resp = 'ass_error'
                     protocol = 'error'
