@@ -2,6 +2,7 @@
 #coding=utf-8
 
 import sys
+import sqlite3
 
 #from what_web import  hunter_plugin
 sys.path.append('modules/')
@@ -31,11 +32,17 @@ sys.setdefaultencoding('utf-8')
 #cu.execute("select * from result")
 #print str(cu.fetchall())
 
-attack = hunter_plugin("www.baidu.com","dic")
+#===============
+#attack = hunter_plugin("www.baidu.com","dic")
 
-print '???'
-attack.exploit()
-
-
+#print '???'
+#attack.exploit()
+cx = sqlite3.connect("dbs/ass.db")
+cu = cx.cursor()
+cu.execute("select * from vulns")
+#print "Result:\n"+ str(cu.fetchall())
+contents = cu.fetchall()
+for row in contents:
+    print row[1]+" | "+row[2]+" | "+row[3]+"\n"
 
 
