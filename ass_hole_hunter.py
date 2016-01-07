@@ -64,9 +64,10 @@ def title_banner_get():
     except KeyboardInterrupt:
         tp.stop()
 
-def same_ip_domain():
+def same_ip_domain(site):
     from same_ip_domain import hunter_plugin
-    same_ip_query = hunter_plugin('www.bstaint.net','bgp_he')
+    #same_ip_query = hunter_plugin('www.bstaint.net','bgp_he')
+    same_ip_query = hunter_plugin(site,'bgp_he')
     same_ip_query.exploit()
 
 def crete_tmp_db():
@@ -102,9 +103,17 @@ def search_plugin(para="all"):
     print "||vuln_name == vuln_type == vuln_source||\n"
 
 
+def all_attack():
+    crete_tmp_db()
+    title_banner_get()
+    #time.sleep(3)
+    what_web()
+
+
 def main():
+    logo_print()
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "ho:s:v", ["help", "output=","search="])
+        opts, args = getopt.getopt(sys.argv[1:], "ho:s:q:dv", ["help", "output=","search=","query=","direct"])
     except getopt.GetoptError as err:
         # print help information and exit:
         print(err) # will print something like "option -a not recognized"
@@ -125,6 +134,10 @@ def main():
                 search_plugin()
             else:
                 search_plugin(a)
+        elif o in ("-d", "--direct"):
+            all_attack()
+        elif o in ("-q", "--query"):
+            same_ip_domain(a)
         else:
             assert False, "unhandled option"
 
