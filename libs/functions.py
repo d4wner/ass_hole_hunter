@@ -23,13 +23,14 @@ import datetime
 import urlparse
 
 sys.path.append('dbs/')
+sys.path.append('modules')
 
 from bs4 import BeautifulSoup
 from libs.Threads import ThreadPool
 from config import global_config
+from path_scan import  hunter_plugin
 
-
-from config import global_config
+#from config import global_config
 
 def url_head(url):
     try:
@@ -122,6 +123,26 @@ def run_payload(payload,arr):
         plugin=__import__("modules."+payload, fromlist=[payload])
         plugin.exploit(arr)
 
+def log_record(msg,msg_type=""):
+    #e means error here...
+    if msg_type == "e":
+        e_msg = "[x]"+msg+"\n"
+        print e_msg
+        e = open("result/error.log","a+")
+        e.writelines(e_msg)
+        e.close()
+
+    #s means success here...
+    elif msg_type == "s":
+        s_msg =  "[!]"+msg+"\n"
+        print s_msg
+        s = open("result/success.log","a+")
+        s.writelines(s_msg)
+        s.close()
+    elif msg_type == "":
+        print "[+]"+msg+"\n"
+
+
 
 def logo_print():
     print """
@@ -132,3 +153,6 @@ def logo_print():
 |                             |
 +-----------------------------+
     """
+
+
+

@@ -3,7 +3,6 @@
 import sys
 import sqlite3
 import time
-import getopt
 
 #from libs.Threads import ThreadPool
 from libs.color import *
@@ -64,14 +63,12 @@ def title_banner_get():
     except KeyboardInterrupt:
         tp.stop()
 
-def same_ip_domain(site):
+def same_ip_domain():
     from same_ip_domain import hunter_plugin
-    #same_ip_query = hunter_plugin('www.bstaint.net','bgp_he')
-    #oshadan,aizhan,oshadan
-    same_ip_query = hunter_plugin(site,'oshadan')
+    same_ip_query = hunter_plugin('www.bstaint.net','bgp_he')
     same_ip_query.exploit()
 
-def create_tmp_db():
+def crete_tmp_db():
     print 'Creating tmp_result_db...'
     result_db_path = global_config.infos['result_path']+"/result.db"
     cx = sqlite3.connect(result_db_path)
@@ -87,67 +84,17 @@ def create_tmp_db():
    # cx = sqlite3.connect(result_db_path)
 
 
-def search_plugin(para="all"):
-    cx = sqlite3.connect("dbs/ass.db")
-    cu = cx.cursor()
-    if para == "all":
-        cu.execute("select * from vulns")
-    else:
-        #print para
-        cu.execute("select * from vulns where lower(vuln_name) like '%"+para+"%'")
-    #print "Result:\n"+ str(cu.fetchall())
-    contents = cu.fetchall()
-    print "||vuln_num == vuln_name == vuln_type == vuln_source == vuln_path||\n"
-    for row in contents:
-        print "|| "+str(row[0])+" | "+row[1]+" | "+row[2]+" | "+row[3]+" | "+row[4]+" ||\n"
-    print "||vuln_num == vuln_name == vuln_type == vuln_source == vuln_path||\n"
-
-def specify_plugin():
-    create_tmp_db()
-    title_banner_get()
-    #指定插件进行扫描，修改whatweb还是单独弄？个人感觉前者好些
+def search_plugin():
+    
 
 
-def all_attack():
-    create_tmp_db()
+
+
+if __name__ == '__main__':
+    crete_tmp_db()
     title_banner_get()
     #time.sleep(3)
     what_web()
-
-
-def main():
-    logo_print()
-    try:
-        opts, args = getopt.getopt(sys.argv[1:], "hs:q:d", ["help","search=","query=","direct"])
-    except getopt.GetoptError as err:
-        # print help information and exit:
-        print(err) # will print something like "option -a not recognized"
-        #usage()
-        sys.exit(2)
-    for o, a in opts:
-        if o in ("-h", "--help"):
-            usage()
-            sys.exit()
-        elif o in ("-s", "--search"):
-            if a == "all":
-                search_plugin()
-            else:
-                search_plugin(a)
-        elif o in ("-d", "--direct"):
-            all_attack()
-        elif o in ("-q", "--query"):
-            #同服旁站查询
-            same_ip_domain(a)
-        else:
-            assert False, "unhandled option"
-    log_record("All attacks end...","s")
-
-if __name__ == '__main__':
-    main()
-    #crete_tmp_db()
-    #)title_banner_get()
-    ##time.sleep(3)
-    #what_web()
     #same_ip_domain()
 
     #hunter = hunter_plugin('192.168.10.103:23')

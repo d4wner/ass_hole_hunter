@@ -1,0 +1,28 @@
+#coding:utf-8
+import urllib,urllib2,cookielib
+
+
+bgp_he_dns = "http://bgp.he.net/dns/www.bstaint.net/#_dns"
+
+#模拟登录
+cj = cookielib.CookieJar()
+
+cookieHandle = urllib2.HTTPCookieProcessor(cj)
+opener = urllib2.build_opener(cookieHandle)
+#url = opener.open('http://www.baidu.com')
+#page = url.read()
+
+opener.addheaders = [('User-agent', 'Opera/9.23')]
+urllib2.install_opener(opener)
+req = urllib2.Request(path)
+conn = urllib2.urlopen(req)
+result = conn.geturl()
+#print path
+#message = {
+	#"header": conn.info(),
+	#"status": conn.getcode(),
+	#"url": conn.geturl(),
+#}
+
+self.render("nowamagic.html",message=result)
+

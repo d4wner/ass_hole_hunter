@@ -57,8 +57,8 @@ class hunter_plugin:
             self.oshadan(host)
         elif self.api == 'aizhan':
             self.aizhan(host)
-        elif self.api == 'bgp_he':
-            self.bgp_he(host)
+        #elif self.api == 'bgp_he':
+        #   self.bgp_he(host)
         else:
             return None
 
@@ -144,6 +144,7 @@ class hunter_plugin:
 
 
     def oshadan(self,input_url):
+        #log_record("test","e")
         r = open(global_config.infos['result_path']+'oshadan.txt','w+')
         count = 1
         while(1):
@@ -187,39 +188,67 @@ class hunter_plugin:
     #except shodan.APIError, e:
     #        print 'Error: %s' % e    
 
-    def bgp_he(self,input_url):
-        #r = open(global_config.infos['result_path']+'bgp_he.txt','w+')
-        bgp_he_dns = "http://bgp.he.net/dns/"+input_url+"#_dns"
-        print bgp_he_dns
-        #resp = urllib2.urlopen(bgp_he_url).read()
-        req = urllib2.Request(bgp_he_dns)
-        req.add_header('User-Agent','Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)')
-        req.add_header('referer','http://bgp.he.net')
-        resp= urllib2.urlopen(req).read()
-        soup = BeautifulSoup(''.join(resp))
-        dnsdata_info_div = soup.find_all("div", attrs={"class": "dnsdata"})[3]
-        ip_text = dnsdata_info_div.find_all("a")
-        #ips= []
-        for ip in ip_text:
-            print ip
-            ip = ip.text
-            #ips.append(ip)
-            bgp_he_url = "http://bgp.he.net/ip/"+ip+"#_dns"
-            print bgp_he_url
-            
-            r_req = urllib2.Request(bgp_he_url)
-            r_req.add_header('User-Agent','Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)')
-            r_req.add_header('referer','http://bgp.he.net')
-            r_resp= urllib2.urlopen(r_req).read()
-            print '------'
-            r_soup = BeautifulSoup(''.join(r_resp))
-            result_info_div = r_soup.find("div", attrs={"id": "dns"})
-            a_text = result_info_div.find_all("a")
-            r = open(global_config.infos['result_path']+'bgp_he_'+ip+'.txt','w+')
-            for item in a_text:
-                print item.text
-                r.writelines(item.text+'\n')
-            r.close()
+    #Orz.....bgp need javascript encode post
+    #def bgp_he(self,input_url):
+    #    #r = open(global_config.infos['result_path']+'bgp_he.)txt','w+')
+    #    bgp_he_dns = "http://bgp.he.net/dns/"+input_url+"#_dns"
+    #    #print bgp_he_dns
+    #    #resp = urllib2.urlopen(bgp_he_url).read()
+    #    #req = urllib2.Request(bgp_he_dns)
+    #    
+    #    cookielib.LWPCookieJar()
+    #    
+    #    #proxy = urllib2.ProxyHandler({'http':'127.0.0.1:8080'})
+    #    
+    #    #opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj),proxy)
+    #    cookieHandle = urllib2.HTTPCookieProcessor(cj)
+    #    opener = urllib2.build_opener(cookieHandle)
+    #    opener.addheaders = [('User-agent', 'Mozilla/5.0 (X11; Linux i686; rv:38.0) Gecko/20100101 Firefox/38.0 Iceweasel/38.2.0'),('referer','http://bgp.he.net')]
+    #    #req.add_header('User-Agent','Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)')
+    #    #req.add_header('referer','http://bgp.he.net')
+    #    #resp= urllib2.urlopen(req).read()
+    #    print bgp_he_dns
+    #    #urllib2.install_opener(opener)
+    #    req = urllib2.Request(bgp_he_dns)
+    #    #resp = urllib2.urlopen(req).read()
+    #    resp = opener.open(req).read()
+    #    #resp = opener.open(bgp_he_dns).read()
+    #    print resp
+
+    #    soup = BeautifulSoup(''.join(resp))
+    #    #dnsdata_info_div = soup.find_all("div", attrs={"class": "dnsdata"})[3]
+    #    dnsdata_info_divs = soup.find_all("div", attrs={"class": "dnsdata"})
+    #    print len(dnsdata_info_divs)
+    #    for dnsdata_info_div in dnsdata_info_divs:
+    #        print dnsdata_info_div
+    #        ip_as = dnsdata_info_div.find_all("a")
+    #        print "####"
+    #        #ips= []
+    #        for ip_a in ip_as:
+    #            ip = ip_a.text
+    #            #ips.append(ip)
+    #            if re.compile(r'\d+\.\d+\.\d+\.\d+',ip):
+    #                print ip
+    #                pass
+    #            else:
+    #                print "[x]No ip address."
+    #                continue
+    #            bgp_he_url = "http://bgp.he.net/ip/"+ip+"#_dns"
+    #            #print bgp_he_url
+    #            
+    #            r_req = urllib2.Request(bgp_he_url)
+    #            r_req.add_header('User-Agent','Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)')
+    #            r_req.add_header('referer','http://bgp.he.net')
+    #            r_resp= urllib2.urlopen(r_req).read()
+    #            print '------'
+    #            r_soup = BeautifulSoup(''.join(r_resp))
+    #            result_info_div = r_soup.find("div", attrs={"id": "dns"})
+    #            a_text = result_info_div.find_all("a")
+    #            r = open(global_config.infos['result_path']+'bgp_he_'+ip+'.txt','w+')
+    #            for item in a_text:
+    #                print item.text
+    #                r.writelines(item.text+'\n')
+    #            r.close()
 
 
     def fofa(self,input_url):
@@ -249,8 +278,10 @@ class hunter_plugin:
 
         r.close()
 
-#if __name__ == '__main__':
-#    #aizhan('www.bstaint.net')
-#    #oshadan('104.28.31.107')
-     #bgp_he('104.28.31.107')
-     #fofa('104.28.31.107')
+if __name__ == '__main__':
+    print "test"
+    #log_record("test","error")
+    #aizhan('www.bstaint.net')
+    #oshadan('104.28.31.107')
+    #bgp_he('104.28.31.107')
+    #fofa('104.28.31.107')

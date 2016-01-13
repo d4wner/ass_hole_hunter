@@ -1,0 +1,5 @@
+import requests
+s = requests.session()
+s.get("http://bgp.he.net/dns/www.95516.com/#_dns")
+resp = s.get("http://bgp.he.net/dns/www.95516.com/#_dns").text
+print resp
